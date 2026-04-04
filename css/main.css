@@ -213,11 +213,14 @@ h4 {
 }
 
 .screenshot-item img {
-    width: 200px;
+    width: 160px;
     height: auto;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
     margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .screenshot-item h4 {
@@ -450,11 +453,11 @@ h4 {
     }
     
     .screenshot-carousel {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
     
     .screenshot-item img {
-        width: 150px;
+        width: 130px;
     }
     
     .pricing-card.featured {
