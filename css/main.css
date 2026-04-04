@@ -1,3 +1,41 @@
+/* ==========================================================================
+   MyDailyTally — Brand-aligned with iOS app design system
+   Color tokens from ColorTheme.swift / DESIGN.md
+   ========================================================================== */
+
+/* CSS Custom Properties — iOS App Brand Tokens */
+:root {
+    /* Primary palette (light theme) */
+    --bg-primary: #FAF8F2;         /* warm cream */
+    --bg-secondary: #F2EDE8;       /* soft warm gray */
+    --bg-card: #FFFFFF;
+    --text-primary: #26262E;       /* dark navy */
+    --text-secondary: #736E6B;     /* warm gray */
+    --accent: #2E9994;             /* warm teal */
+    --accent-hover: #267E7A;
+    --accent-secondary: #38B3AB;   /* lighter teal */
+    --streak-orange: #ED8C23;      /* warm orange */
+    --separator: #E0DBD6;
+
+    /* Dark palette (footer, dark sections) */
+    --dark-bg: #171A2B;            /* dark navy */
+    --dark-card: #292B42;
+    --dark-text: #F2F0EB;
+    --dark-text-muted: #9E9CA6;
+    --dark-separator: #383A4D;
+    --dark-accent: #F29940;        /* warm orange (dark mode accent) */
+
+    /* Semantic */
+    --success: #34C759;
+
+    /* Spacing (from 4pt base) */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 14px;
+    --radius-xl: 16px;
+    --radius-xxl: 20px;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -8,8 +46,8 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: #ffffff;
+    color: var(--text-primary);
+    background: var(--bg-primary);
 }
 
 .container {
@@ -31,6 +69,7 @@ h2 {
     font-weight: 600;
     text-align: center;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 h3 {
@@ -47,7 +86,7 @@ h4 {
 
 .section-subtitle {
     font-size: 1.25rem;
-    color: #666;
+    color: var(--text-secondary);
     text-align: center;
     margin-bottom: 3rem;
     max-width: 600px;
@@ -59,7 +98,7 @@ h4 {
 .btn {
     display: inline-block;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -69,23 +108,48 @@ h4 {
 }
 
 .btn-primary {
-    background: #20B2AA;
+    background: var(--accent);
     color: white;
 }
 
 .btn-primary:hover {
-    background: #1a9d96;
+    background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
-/* Hero Section */
+/* Hero Section — warm teal gradient, not purple */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1E2A3A 50%, #1A3038 100%);
+    color: var(--dark-text);
     padding: 6rem 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle warm teal glow in hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 120%;
+    background: radial-gradient(ellipse, rgba(46, 153, 148, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(242, 153, 64, 0.08) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .hero-content {
@@ -93,18 +157,21 @@ h4 {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-text h1 {
-    color: white;
+    color: var(--dark-text);
     margin-bottom: 1.5rem;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    opacity: 0.9;
+    opacity: 0.85;
     line-height: 1.6;
+    color: var(--dark-text-muted);
 }
 
 .hero-features {
@@ -140,7 +207,7 @@ h4 {
 }
 
 .coming-soon {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--dark-text-muted);
     font-size: 0.9rem;
 }
 
@@ -154,7 +221,7 @@ h4 {
     max-width: 300px;
     height: auto;
     border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(46, 153, 148, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -163,10 +230,10 @@ h4 {
     }
 }
 
-/* Features Section */
+/* Features Section — warm cream background */
 .features {
     padding: 6rem 0;
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .features-grid {
@@ -176,16 +243,18 @@ h4 {
 }
 
 .feature-card {
-    background: white;
+    background: var(--bg-card);
     padding: 2.5rem;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--separator);
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .feature-icon-large {
@@ -194,18 +263,19 @@ h4 {
 }
 
 .feature-card h3 {
-    color: #1a202c;
+    color: var(--text-primary);
     margin-bottom: 1rem;
 }
 
 .feature-card p {
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
-/* Screenshots Section */
+/* Screenshots Section — primary warm cream bg */
 .screenshots {
     padding: 6rem 0;
+    background: var(--bg-primary);
 }
 
 .screenshot-carousel {
@@ -222,7 +292,7 @@ h4 {
     width: 160px;
     height: auto;
     border-radius: 18px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     margin-bottom: 1rem;
     display: block;
     margin-left: auto;
@@ -230,19 +300,19 @@ h4 {
 }
 
 .screenshot-item h4 {
-    color: #1a202c;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .screenshot-item p {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
-/* Pricing Section */
+/* Pricing Section — secondary warm bg */
 .pricing {
     padding: 6rem 0;
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .pricing-grid {
@@ -254,21 +324,23 @@ h4 {
 }
 
 .pricing-card {
-    background: white;
+    background: var(--bg-card);
     padding: 2.5rem;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--separator);
 }
 
 .pricing-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .pricing-card.featured {
-    border: 3px solid #20B2AA;
+    border: 3px solid var(--accent);
     transform: scale(1.05);
 }
 
@@ -281,7 +353,7 @@ h4 {
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: #20B2AA;
+    background: var(--accent);
     color: white;
     padding: 8px 20px;
     border-radius: 20px;
@@ -292,17 +364,17 @@ h4 {
 .price {
     font-size: 3rem;
     font-weight: 700;
-    color: #20B2AA;
+    color: var(--accent);
     margin-bottom: 0.5rem;
 }
 
 .price-period {
     font-size: 1.5rem;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .price-subtitle {
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
 }
 
@@ -314,16 +386,18 @@ h4 {
 
 .features-list li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--separator);
+    color: var(--text-primary);
 }
 
 .features-list li:last-child {
     border-bottom: none;
 }
 
-/* Privacy Section */
+/* Privacy Section — primary warm cream bg */
 .privacy-section {
     padding: 6rem 0;
+    background: var(--bg-primary);
 }
 
 .privacy-content {
@@ -340,7 +414,7 @@ h4 {
 
 .privacy-text p {
     font-size: 1.125rem;
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     line-height: 1.7;
 }
@@ -364,16 +438,17 @@ h4 {
 
 .privacy-feature h4 {
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .privacy-feature p {
-    color: #666;
+    color: var(--text-secondary);
 }
 
-/* Footer */
+/* Footer — app dark theme navy */
 .footer {
-    background: #1a202c;
-    color: white;
+    background: var(--dark-bg);
+    color: var(--dark-text);
     padding: 4rem 0 2rem;
 }
 
@@ -386,11 +461,11 @@ h4 {
 
 .footer-section h4 {
     margin-bottom: 1.5rem;
-    color: #20B2AA;
+    color: var(--dark-accent);
 }
 
 .footer-section p {
-    color: #a0a0a0;
+    color: var(--dark-text-muted);
     margin-bottom: 1.5rem;
 }
 
@@ -403,13 +478,13 @@ h4 {
 }
 
 .footer-links a {
-    color: #a0a0a0;
+    color: var(--dark-text-muted);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: #20B2AA;
+    color: var(--dark-accent);
 }
 
 .app-store-footer img {
@@ -418,10 +493,10 @@ h4 {
 }
 
 .footer-bottom {
-    border-top: 1px solid #374151;
+    border-top: 1px solid var(--dark-separator);
     padding-top: 2rem;
     text-align: center;
-    color: #a0a0a0;
+    color: var(--dark-text-muted);
 }
 
 /* Responsive Design */
@@ -429,43 +504,43 @@ h4 {
     h1 {
         font-size: 2.5rem;
     }
-    
+
     h2 {
         font-size: 2rem;
     }
-    
+
     .hero {
         padding: 4rem 0;
         min-height: auto;
     }
-    
+
     .hero-content {
         grid-template-columns: 1fr;
         gap: 3rem;
         text-align: center;
     }
-    
+
     .hero-features {
         grid-template-columns: 1fr;
     }
-    
+
     .privacy-content {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
+
     .privacy-text h2 {
         text-align: center;
     }
-    
+
     .screenshot-carousel {
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
-    
+
     .screenshot-item img {
         width: 130px;
     }
-    
+
     .pricing-card.featured {
         transform: none;
     }
