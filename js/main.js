@@ -3,14 +3,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // App Store link handling
     const appStoreLinks = document.querySelectorAll('#app-store-link, #footer-app-store-link, #get-premium-link');
-    const appStoreUrl = 'https://apps.apple.com/app/mydailytally/id[APP_ID]'; // TODO: Replace with actual App Store ID
+    const appStoreUrl = 'https://apps.apple.com/us/app/mydailytally-habit-tracker/id6761585975';
     
     appStoreLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            // For now, show an alert since the app isn't live yet
-            alert('MyDailyTally is coming soon to the App Store! We\'ll update this link once it\'s approved.');
-            // When live, use: window.open(appStoreUrl, '_blank');
+            window.open(appStoreUrl, '_blank');
         });
     });
 
@@ -89,12 +87,7 @@ if (isIOS()) {
 
 // Handle dynamic App Store URL based on device
 function getAppStoreUrl() {
-    if (isIOS()) {
-        return 'https://apps.apple.com/app/mydailytally/id[APP_ID]';
-    } else {
-        // For non-iOS devices, maybe show the coming soon message
-        return null;
-    }
+    return 'https://apps.apple.com/us/app/mydailytally-habit-tracker/id6761585975';
 }
 
 // Simple feature detection and progressive enhancement
